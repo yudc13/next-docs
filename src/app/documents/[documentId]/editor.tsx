@@ -13,6 +13,8 @@ import TableRow from '@tiptap/extension-table-row'
 import Image from '@tiptap/extension-image'
 
 import Underline from '@tiptap/extension-underline'
+import FontFamily from '@tiptap/extension-font-family'
+import TextStyle from '@tiptap/extension-text-style'
 
 import { useEditorStore } from '@/store/use-editor-store'
 
@@ -58,6 +60,8 @@ const Editor = () => {
 				allowBase64: true,
 			}),
 			Underline,
+			FontFamily,
+			TextStyle,
 		],
 		editorProps: {
 			attributes: {
