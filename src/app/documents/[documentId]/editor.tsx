@@ -4,20 +4,20 @@ import { EditorContent, useEditor } from '@tiptap/react'
 import StartKit from '@tiptap/starter-kit'
 import TaskList from '@tiptap/extension-task-list'
 import Taskitem from '@tiptap/extension-task-item'
-
 import Table from '@tiptap/extension-table'
 import TableCell from '@tiptap/extension-table-cell'
 import TableHeader from '@tiptap/extension-table-header'
 import TableRow from '@tiptap/extension-table-row'
-
 import Image from '@tiptap/extension-image'
-
 import Underline from '@tiptap/extension-underline'
 import FontFamily from '@tiptap/extension-font-family'
 import TextStyle from '@tiptap/extension-text-style'
 import Heading from '@tiptap/extension-heading'
 import Paragraph from '@tiptap/extension-paragraph'
 import Text from '@tiptap/extension-text'
+import { Color } from '@tiptap/extension-color'
+import Highlight from '@tiptap/extension-highlight'
+import Link from '@tiptap/extension-link'
 
 import { useEditorStore } from '@/store/use-editor-store'
 
@@ -68,6 +68,15 @@ const Editor = () => {
 			Heading,
 			Paragraph,
 			Text,
+			Color,
+			Highlight.configure({
+				multicolor: true,
+			}),
+			Link.configure({
+				openOnClick: false,
+				autolink: true,
+				defaultProtocol: 'https',
+			}),
 		],
 		editorProps: {
 			attributes: {
