@@ -15,6 +15,9 @@ import Image from '@tiptap/extension-image'
 import Underline from '@tiptap/extension-underline'
 import FontFamily from '@tiptap/extension-font-family'
 import TextStyle from '@tiptap/extension-text-style'
+import Heading from '@tiptap/extension-heading'
+import Paragraph from '@tiptap/extension-paragraph'
+import Text from '@tiptap/extension-text'
 
 import { useEditorStore } from '@/store/use-editor-store'
 
@@ -62,6 +65,9 @@ const Editor = () => {
 			Underline,
 			FontFamily,
 			TextStyle,
+			Heading,
+			Paragraph,
+			Text,
 		],
 		editorProps: {
 			attributes: {

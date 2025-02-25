@@ -12,18 +12,72 @@ import {
 import {
 	DropdownMenu,
 	DropdownMenuContent,
-	DropdownMenuItem,
 	DropdownMenuTrigger,
-	DropdownMenuLabel,
+	DropdownMenuCheckboxItem,
 } from '@/components/ui/dropdown-menu'
 import { cn } from '@/lib/utils'
 import { useEditorStore } from '@/store/use-editor-store'
 import { Separator } from '@/components/ui/separator'
+import { Level } from '@tiptap/extension-heading'
 
 interface ToolbarButtonProps {
 	onClick?: () => void
 	isActive?: boolean
 	icon: LucideIcon
+}
+
+const HeadingButton = () => {
+	const { editor } = useEditorStore()
+
+	const headings = [
+		{ label: '普通文本', value: 0, fontSize: '16px' },
+		{ label: '标题 1', value: 1, fontSize: '32px' },
+		{ label: '标题 2', value: 2, fontSize: '24px' },
+		{ label: '标题 3', value: 3, fontSize: '20px' },
+		{ label: '标题 4', value: 4, fontSize: '18px' },
+		{ label: '标题 5', value: 5, fontSize: '16px' },
+	]
+
+	const currentHeading = editor?.getAttributes('heading').level ?? 0
+
+	const currentHeadingName =
+		headings.find((item) => item.value === currentHeading)?.label ?? '普通文本'
+
+	return (
+		<DropdownMenu>
+			<DropdownMenuTrigger asChild>
+				<div
+					className={cn(
+						'h-7 w-[120px] shrink-0 flex items-center justify-between rounded-sm hover:bg-neutral-200/80 px-1.5 text-sm overflow-hidden outline-none'
+					)}
+				>
+					<span className='truncate'>{currentHeadingName}</span>
+					<ChevronDown className='size-4 ml-2 shrink-0' />
+				</div>
+			</DropdownMenuTrigger>
+			<DropdownMenuContent>
+				{headings.map((heading) => (
+					<DropdownMenuCheckboxItem
+						key={heading.value}
+						checked={currentHeading === heading.value}
+						onCheckedChange={() => {
+							if (heading.value === 0) {
+								editor?.chain().focus().setParagraph().run()
+							} else {
+								editor
+									?.chain()
+									.focus()
+									.toggleHeading({ level: heading.value as Level })
+									.run()
+							}
+						}}
+					>
+						<span>{heading.label}</span>
+					</DropdownMenuCheckboxItem>
+				))}
+			</DropdownMenuContent>
+		</DropdownMenu>
+	)
 }
 
 const FontFamilyButton = () => {
@@ -38,26 +92,25 @@ const FontFamilyButton = () => {
 	const currentFont = editor?.getAttributes('textStyle').fontFamily ?? 'Arial'
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger>
-				<button
+			<DropdownMenuTrigger asChild>
+				<div
 					className={cn(
-						'h-7 w-[120px] shrink-0 flex items-center justify-between rounded-sm hover:bg-neutral-200/80 px-1.5 text-sm overflow-hidden'
+						'h-7 w-[120px] shrink-0 flex items-center justify-between rounded-sm hover:bg-neutral-200/80 px-1.5 text-sm overflow-hidden outline-none'
 					)}
 				>
 					<span className='truncate'>{currentFont}</span>
 					<ChevronDown className='size-4 ml-2 shrink-0' />
-				</button>
+				</div>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent>
 				{fonts.map((font) => (
-					<DropdownMenuItem
+					<DropdownMenuCheckboxItem
 						key={font.value}
-						onClick={() => editor?.chain().focus().setFontFamily(font.value).run()}
+						checked={currentFont === font.value}
+						onCheckedChange={() => editor?.chain().focus().setFontFamily(font.value).run()}
 					>
-						<DropdownMenuLabel className={`${currentFont === font.value ? 'font-bold' : ''}`}>
-							{font.label}
-						</DropdownMenuLabel>
-					</DropdownMenuItem>
+						<span style={{ fontFamily: font.value }}>{font.label}</span>
+					</DropdownMenuCheckboxItem>
 				))}
 			</DropdownMenuContent>
 		</DropdownMenu>
@@ -135,6 +188,8 @@ const Toolbar = () => {
 			{sections[0].map((item) => (
 				<ToolbarButton key={item.label} {...item} />
 			))}
+			<Separator orientation='vertical' className='h-6 bg-neutral-300' />
+			<HeadingButton />
 			<Separator orientation='vertical' className='h-6 bg-neutral-300' />
 			<FontFamilyButton />
 			<Separator orientation='vertical' className='h-6 bg-neutral-300' />
