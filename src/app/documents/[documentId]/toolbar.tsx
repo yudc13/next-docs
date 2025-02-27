@@ -1,4 +1,6 @@
 'use client'
+import AlignmentButton from '@/app/documents/components/AlignmentButton';
+import ListButton from '@/app/documents/components/ListButton';
 import {
 	LucideIcon,
 	Redo2Icon,
@@ -7,30 +9,10 @@ import {
 	ItalicIcon,
 	UnderlineIcon,
 	MessageSquarePlusIcon,
-	ChevronDown,
-	HighlighterIcon,
-	Link2Icon,
-	Heading1Icon,
-	Heading2Icon,
-	Heading3Icon,
-	Heading4Icon,
-	Heading5Icon,
-	Heading6Icon,
 } from 'lucide-react'
-import { ColorResult, SketchPicker } from 'react-color'
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuTrigger,
-	DropdownMenuCheckboxItem,
-} from '@/components/ui/dropdown-menu'
-import { cn } from '@/lib/utils'
+
 import { useEditorStore } from '@/store/use-editor-store'
 import { Separator } from '@/components/ui/separator'
-import { Level } from '@tiptap/extension-heading'
-import { useState } from 'react'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
 import ToolbarButton from '../components/ToolbarButton'
 import FontFamilyButton from '../components/FontFamilyButton'
 import HeadingButton from '../components/HeadingButton'
@@ -109,6 +91,8 @@ const Toolbar = () => {
 			<Separator orientation='vertical' className='h-6 bg-neutral-300' />
 			<LinkButton />
 			<ImageButton />
+			<AlignmentButton />
+			<ListButton />
 			{sections[2].map((item) => (
 				<ToolbarButton key={item.label} {...item} />
 			))}

@@ -19,6 +19,9 @@ import Text from '@tiptap/extension-text'
 import { Color } from '@tiptap/extension-color'
 import Highlight from '@tiptap/extension-highlight'
 import Link from '@tiptap/extension-link'
+import TextAlign from '@tiptap/extension-text-align'
+import BulletList from '@tiptap/extension-bullet-list'
+import ListItem from '@tiptap/extension-list-item'
 
 import { useEditorStore } from '@/store/use-editor-store'
 
@@ -79,6 +82,11 @@ const Editor = () => {
 				autolink: true,
 				defaultProtocol: 'https',
 			}),
+			TextAlign.configure({
+				types: ['heading', 'paragraph'],
+			}),
+			ListItem,
+			BulletList,
 		],
 		editorProps: {
 			attributes: {
