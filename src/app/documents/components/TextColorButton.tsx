@@ -16,7 +16,7 @@ const TextColorButton = () => {
 		editor?.chain().focus().setColor(color.hex).run()
 	}
 
-	const isActive = editor?.isActive('textStyle') ?? false
+	const isActive = editor?.isActive('textStyle', { color: currentColor }) ?? false
 
 	return (
 		<DropdownMenu>

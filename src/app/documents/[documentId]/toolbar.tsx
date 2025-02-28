@@ -13,13 +13,14 @@ import {
 
 import { useEditorStore } from '@/store/use-editor-store'
 import { Separator } from '@/components/ui/separator'
-import ToolbarButton from '../components/ToolbarButton'
-import FontFamilyButton from '../components/FontFamilyButton'
-import HeadingButton from '../components/HeadingButton'
-import HighlightButton from '../components/HighlightButton'
-import LinkButton from '../components/LinkButton'
-import TextColorButton from '../components/TextColorButton'
-import ImageButton from '../components/ImageButton'
+import ToolbarButton from '@/app/documents/components/ToolbarButton'
+import FontFamilyButton from '@/app/documents/components/FontFamilyButton'
+import HeadingButton from '@/app/documents/components/HeadingButton'
+import HighlightButton from '@/app/documents/components/HighlightButton'
+import LinkButton from '@/app/documents/components/LinkButton'
+import TextColorButton from '@/app/documents/components/TextColorButton'
+import ImageButton from '@/app/documents/components/ImageButton'
+import FontSizeButton from '@/app/documents/components/FontSizeButton';
 
 const Toolbar = () => {
 	const { editor } = useEditorStore()
@@ -82,6 +83,8 @@ const Toolbar = () => {
 			<HeadingButton />
 			<Separator orientation='vertical' className='h-6 bg-neutral-300' />
 			<FontFamilyButton />
+			<Separator orientation='vertical' className='h-6 bg-neutral-300' />
+			<FontSizeButton />
 			<Separator orientation='vertical' className='h-6 bg-neutral-300' />
 			{sections[1].map((item) => (
 				<ToolbarButton key={item.label} {...item} />

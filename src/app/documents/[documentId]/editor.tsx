@@ -22,6 +22,7 @@ import Link from '@tiptap/extension-link'
 import TextAlign from '@tiptap/extension-text-align'
 import BulletList from '@tiptap/extension-bullet-list'
 import ListItem from '@tiptap/extension-list-item'
+import { FontSize } from '@/extensions/font-size';
 
 import { useEditorStore } from '@/store/use-editor-store'
 
@@ -87,6 +88,7 @@ const Editor = () => {
 			}),
 			ListItem,
 			BulletList,
+			FontSize
 		],
 		editorProps: {
 			attributes: {
